@@ -1,23 +1,72 @@
-## Титульный лист
-*РОССИЙСКИЙ УНИВЕРСИТЕТ ДРУЖБЫ НАРОДОВ*
+---
+## Front matter
+title: "Отчёт по лабораторной работе №4"
+subtitle: "Создание и процесс обработки программ на языке ассемблера NASM"
+author: "Прокопьева Марина"
 
-**Факультет физико-математических и естественных наук**
+## Generic otions
+lang: ru-RU
+toc-title: "Содержание"
 
-**Кафедра прикладной информатики и теории вероятностей**
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
 
-**ОТЧЕТ** 
+## Pdf output format
+toc: true # Table of contents
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
+babel-lang: russian
+babel-otherlangs: english
+## Fonts
+mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
+indent: true
+header-includes:
+  - \usepackage{indentfirst}
+  - \usepackage{float} # keep figures where there are in the text
+  - \floatplacement{figure}{H} # keep figures where there are in the text
+---
 
-**ПО ЛАБОРАТОРНОЙ РАБОТЕ № 4**
 
-*дисциплина: Архитектура компьютеров и операционных систем*	
-
-Студент: Прокопьева Марина
-Студенческий билет: 1132237370
-Группа:  НБИбд-02-23 
-
-**МОСКВА**
-
-2023 г
 
 # Цель работы
 
@@ -170,21 +219,24 @@ NASM используется Intel-синтаксис и поддерживаю
 
 **Программа Hello world!**
 
-Создала каталог для работы с программами на языке ассемблера NASM и перешла в созданный каталог:
-![рис 1.](image/001.png)
+Создала каталог для работы с программами на языке ассемблера NASM и перешла в созданный каталог (рис. @fig:001):
 
-Создала текстовый файл с именем hello.asm, открыла этот файл с помощью любого текстового редактора
-![рис 2.](image/002.png)
+![Название рисунка](image/001.png){#fig:001 width=70%}
 
+Создала текстовый файл с именем hello.asm, открыла этот файл с помощью любого текстового редактора (рис. @fig:002).
 
-Ввела в него следующий текст.                
-![рис 3.](image/003.png)
+![Название рисунка](image/002.png){#fig:002 width=70%}
+
+Ввела в него следующий текст (рис. @fig:003).
+
+![Название рисунка](image/003.png){#fig:003 width=70%}
 
 
 **Транслятор NASM**
 
-Компилирую приведенный выше текст и проверяю его.
-![рис 4.](image/004.png)
+Компилирую приведенный выше текст и проверяю его (рис. @fig:004).
+
+![Название рисунка](image/004.png){#fig:004 width=70%}
 
 **Расширенный синтаксис командной строки NASM**
 
@@ -197,62 +249,76 @@ nasm -o obj.o -f elf -g -l list.lst hello.asm
 будет elf, и в него будут включены символы для отладки (опция -g), кроме того, будет создан
 файл листинга list.lst (опция -l).
 
-С помощью команды ls проверила, что файлы были созданы.
+С помощью команды ls проверила, что файлы были созданы (рис. @fig:005).
 
-![рис 5.](image/005.png)
+![Название рисунка](image/005.png){#fig:005 width=70%}
 
 **Компоновщик LD**
 
 Выполните следующую команду:
 ld -m elf_i386 hello.o -o hello
-С помощью команды ls проверила что команда работает так как надо.
-![рис 6.](image/006.png)
+С помощью команды ls проверила что команда работает так как надо (рис. @fig:006).
+
+![Название рисунка](image/006.png){#fig:006 width=70%}
 
 Выполнила следующую команду:
 ld -m elf_i386 obj.o -o main 
 Формат командной строки LD можно увидеть, набрав ld --help
-![рис 7.](image/007.png)
+
+![Название рисунка](image/007.png){#fig:007 width=70%}
 
 **Запуск исполняемого файла** 
 
 Запустила на выполнение созданный исполняемый файл, находящийся в текущем каталоге,
 можно, набрав в командной строке:
 ./hello
+(рис. @fig:008)
 
-![рис 8.](image/008.png)
+![Название рисунка](image/008.png){#fig:008 width=70%}
 
 **Самостоятельная работа**
 
 *1* 
 В каталоге ~/work/arch-pc/lab04 с помощью команды cp создала копию файла
-hello.asm с именем lab4.asm и проверила
+hello.asm с именем lab4.asm и проверила (рис. @fig:009).
 
-![рис 9.](image/009.png)
+![Название рисунка](image/009.png){#fig:009 width=70%}
 
 *2* 
 С помощью любого текстового редактора внесла изменения в текст программы в
-файле lab4.asm так, чтобы вместо Hello world! на экран выводилась строка с моей
-фамилией и именем.
+файле lab4.asm так, чтобы вместо Hello world!на экран выводилась строка с моей
+фамилией и именем (рис. @fig:010).
 
-![рис 10.](image/010.png)
+![Название рисунка](image/010.png){#fig:010 width=70%}
 
 *3* 
 Оттранслировала полученный текст программы lab4.asm в объектный файл. Выполнила
-компоновку объектного файла и запустила получившийся исполняемый файл.
+компоновку объектного файла и запустила получившийся исполняемый файл (рис. @fig:011, @fig:012, @fig:013).
 
-![рис 11.](image/011.png)
-![рис 12.](image/012.png)
-![рис 13.](image/013.png)
+![Название рисунка](image/011.png){#fig:011 width=70%}
+
+
+![Название рисунка](image/012.png){#fig:012 width=70%}
+
+
+![Название рисунка](image/013.png){#fig:013 width=70%}
 
 *4*
 Скопировала файлы hello.asm и lab4.asm в Ваш локальный репозиторий в каталог 
 ~/work/study/2023-2024/"Архитектура компьютера"/arch-pc/labs/lab04/.
-Загрузила файлы на Github.
-![рис 14.](image/014.png)
-![рис 15.](image/015.png)
-![рис 16.](image/016.png)
+Загрузила файлы на Github (рис. @fig:014, @fig:015, @fig:016).
+
+![Название рисунка](image/014.png){#fig:014 width=70%}
+
+
+![Название рисунка](image/015.png){#fig:015 width=70%}
+
+
+![Название рисунка](image/016.png){#fig:016 width=70%}
 
 # Выводы
 
 Освоила процедуры компиляции и сборки программ, написанных на ассемблере NASM. 
-.
+
+::: {#refs}
+:::
